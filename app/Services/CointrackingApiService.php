@@ -31,7 +31,7 @@ class CointrackingApiService
                 "username" => $this->login,
                 "password" => $this->pass
             ]),
-            'headers' => ['Content-Type' => 'application/json'],
+            'headers' => ['Content-Type' git=> 'application/json'],
         ]);
 
         if ($response->getStatusCode() === !200) {
@@ -54,22 +54,6 @@ class CointrackingApiService
                     'X-SESSION-ID' => md5($this->session)
                 ],
             ]);
-        } catch (ClientException $e) {
-            echo $e->getResponse()->getBody();
-        }
-    }
-
-    public function getAllTransactions()
-    {
-        $client = new \GuzzleHttp\Client();
-        try {
-            $response = $client->request('POST', $this->host . "/ios/v10/transactions", [
-                'headers' => [
-                    'Content-Type' => 'application/json',
-                    'X-SESSION-ID' => md5($this->session)
-                ],
-            ]);
-            return json_decode($response->getBody());
         } catch (ClientException $e) {
             echo $e->getResponse()->getBody();
         }
